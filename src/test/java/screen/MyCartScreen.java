@@ -1,11 +1,12 @@
 package screen;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
 import tests.TestBase;
 
 import java.time.Duration;
@@ -33,12 +34,25 @@ public class MyCartScreen extends TestBase {
         PageFactory.initElements(driver, this);
     }
 
-    private WebDriverWait getWebDriverWait() {
-        return new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
     public void checkScreenTitle() {
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
+        FluentWait<AndroidDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(15))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+
+        fluentWait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return titleElement.isDisplayed() &&
+                            titleElement.getText().equals("My Cart");
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        });
+
         String titleCard = titleElement.getText();
         assertEquals("My Cart", titleCard, "Title should 'My Cart'");
         log().info("Screen Title: {}", titleCard);

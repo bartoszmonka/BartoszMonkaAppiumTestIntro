@@ -12,6 +12,8 @@ target/
 /.idea/misc.xml
 /.idea/vcs.xml
 /.idea/encodings.xml
+/.allure/allure-*/
+
 *.iws
 *.iml
 *.ipr
