@@ -61,7 +61,7 @@ public class MyCartScreen extends TestBase {
     public void checkProductName() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
         String titleText = productNameElement.getText();
-        assertEquals(productsScreen.getProductText(), titleText, "Text in el7 should match productText");
+        assertEquals(productsScreen.getProductText(), titleText, "Text should match productText");
         log().info("Product name: {}", titleText);
     }
 

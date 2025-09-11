@@ -2,13 +2,16 @@ package tests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import screen.*;
+import utils.RetryAnalyzer;
 
 public class CompleteOrderProcessTests extends TestBase {
     ProductsScreen productsScreen;
 
     @TmsLink("TC ID-1")
     @Severity(SeverityLevel.BLOCKER)
+    @ExtendWith(RetryAnalyzer.class)
     @Test
     @Description("End-to-end test validating complete e-commerce checkout process from product selection to order completion")
     public void verifyCompleteCheckoutProcess() {

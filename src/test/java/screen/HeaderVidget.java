@@ -12,6 +12,12 @@ public class HeaderVidget extends TestBase {
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/cartIV")
     private WebElement cartButton;
 
+    @FindBy(xpath = "//*[@content-desc='View menu']")
+    private WebElement viewMenuElement;
+
+    @FindBy(xpath = "//*[@text='Catalog']")
+    private WebElement catalogElement;
+
     public HeaderVidget(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -21,5 +27,25 @@ public class HeaderVidget extends TestBase {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(cartButton));
         cartButton.click();
         log().info("tap on cart");
+    }
+
+    public void clickOnViewMenu() {
+        viewMenuElement.click();
+        log().info("Clicked on View menu");
+    }
+
+    public void clickOnCatalog() {
+        catalogElement.click();
+        log().info("Clicked on Catalog - navigation reset completed");
+    }
+
+    public void resetNavigationToCatalog() {
+        try {
+            log().info("Resetting navigation to catalog view before retry");
+            clickOnViewMenu();
+            clickOnCatalog();
+        } catch (Exception e) {
+            log().warn("Failed to reset navigation to catalog: {}", e.getMessage());
+        }
     }
 }

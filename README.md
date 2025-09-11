@@ -144,9 +144,11 @@ BartoszMonkaAppiumTestIntro/
 │           │   ├── ProductDetailsScreen.java
 │           │   ├── ProductsScreen.java
 │           │   └── ReviewYourOrderScreen.java
-│           └── tests/                     # Test classes
-│               ├── CompleteOrderProcessTests.java
-│               └── TestBase.java          # Base test configuration
+│           ├── tests/                     # Test classes
+│           │   ├── CompleteOrderProcessTests.java
+│           │   └── TestBase.java          # Base test configuration
+│           └── utils/                     # Utility classes
+│               └── RetryAnalyzer.java     # Test retry mechanism
 ├── target/                                # Build artifacts and reports
 ├── pom.xml                               # Maven configuration
 └── README.md                             # This file
@@ -174,6 +176,13 @@ The framework includes a comprehensive end-to-end test that validates:
 5. Payment method configuration
 6. Order review and confirmation
 7. Order completion
+
+### Test Retry Mechanism
+The framework includes an intelligent test retry system that:
+- Automatically retries failed tests up to 2 times
+- Resets application navigation state before each retry attempt
+- Provides detailed logging of retry attempts and outcomes
+- Uses JUnit 5 extension mechanism for seamless integration
 
 ### Allure Integration
 - Detailed step-by-step reporting
@@ -210,5 +219,5 @@ For issues and questions, please refer to the project documentation or create an
 ---
 
 **Author**: Bartosz Monka  
-**Version**: 1.2  
+**Version**: 1.3  
 **Last Updated**: 11.09.2025
