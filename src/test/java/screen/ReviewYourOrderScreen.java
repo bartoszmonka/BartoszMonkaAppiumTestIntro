@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReviewYourOrderScreen extends TestBase {
 
@@ -41,12 +40,6 @@ public class ReviewYourOrderScreen extends TestBase {
         String productName = productNameElement.getText();
         assertEquals(productName, productsScreen.getProductText(), "Text in el26 should match productText");
         log().info("Product name verified: {}", productName);
-    }
-
-    public void assertProductNameIsDisplayed() {
-        log().info("Checking product name is displayed");
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        assertTrue(productNameElement.isDisplayed(), "Product name element should be displayed");
     }
 
     public void tapPlaceOrderButton() {

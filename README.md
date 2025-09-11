@@ -27,10 +27,12 @@ Before setting up the project, ensure you have the following installed:
 
 ## Project Setup
 
-### 1. Prepare Android Studio
+### 1. Prepare IDE
 1. Download and install Android Studio from the official website
 2. Set up Android SDK and create an Android Virtual Device (AVD)
 3. Ensure the emulator is working properly
+4. Download and install IntelliJ IDEA from the official website
+5. Set up JDK
 
 ### 2. Clone the Project
 ```bash

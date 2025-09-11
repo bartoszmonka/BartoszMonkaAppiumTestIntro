@@ -57,7 +57,7 @@ public class RetryAnalyzer implements InvocationInterceptor {
                 if (attempt > 1) {
                     logger.info("Test method {} succeeded on attempt {}", testName, attempt);
                 }
-                return; // Test passed, exit retry loop
+                return;
             } catch (Throwable throwable) {
                 lastException = throwable;
                 if (attempt <= MAX_NUMBER_OF_RETRIES) {
