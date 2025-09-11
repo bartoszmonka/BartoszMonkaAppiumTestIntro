@@ -19,8 +19,9 @@ Before setting up the project, ensure you have the following installed:
 - **Java 21** or higher
 - **Maven 3.6+**
 - **Android Studio** (latest version)
+- **IntelliJ IDEA** (latest version)
 - **Node.js** (for Appium)
-- **Appium** (installed globally via npm)
+- **Appium** 
 - **Android SDK** and **Android Emulator** or physical Android device
 - **Git**
 
