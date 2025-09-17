@@ -44,6 +44,7 @@ public class TestBase {
         } catch (Exception e) {
             log().error("error during AndroidDriver initialization: {}", e.getMessage(), e);
             e.printStackTrace();
+            throw new RuntimeException("Failed to initialize AndroidDriver. Please ensure Appium server is running on http://127.0.0.1:4723", e);
         }
     }
 

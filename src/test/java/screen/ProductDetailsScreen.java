@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class ProductDetailsScreen extends TestBase {
     private final ProductsScreen productsScreen;
@@ -26,11 +26,8 @@ public class ProductDetailsScreen extends TestBase {
 
     public void checkProductNameInHeader() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameHeader));
-        String headerProductName = productNameHeader.getText();
         String productText = productsScreen.getProductText();
-        assertEquals(productText, headerProductName, "Product text '" + productText + "' should match header '" + headerProductName + "'");
-        log().info("productText: {}", productText);
-        log().info("headerProductName: {}", headerProductName);
+        assertThat(productNameHeader).hasTextMatching(productText, "Product text should match header");
     }
 
     public void tapButtonAddToCart() {

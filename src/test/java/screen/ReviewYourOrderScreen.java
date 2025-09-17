@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class ReviewYourOrderScreen extends TestBase {
 
@@ -30,16 +30,12 @@ public class ReviewYourOrderScreen extends TestBase {
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
-        String reviewText = titleElement.getText();
-        assertEquals("Review your order", reviewText, "Text should be 'Review your order'");
-        log().info("Screen Title: {}", reviewText);
+        assertThat(titleElement).hasTextEqualTo("Review your order", "Text should be 'Review your order'");
     }
 
     public void verifyProductName() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        String productName = productNameElement.getText();
-        assertEquals(productName, productsScreen.getProductText(), "Text in el26 should match productText");
-        log().info("Product name verified: {}", productName);
+        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text in el26 should match productText");
     }
 
     public void tapPlaceOrderButton() {

@@ -11,7 +11,7 @@ import tests.TestBase;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class MyCartScreen extends TestBase {
     private final ProductsScreen productsScreen;
@@ -41,35 +41,26 @@ public class MyCartScreen extends TestBase {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class);
 
-        fluentWait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                try {
-                    return titleElement.isDisplayed() &&
-                            titleElement.getText().equals("My Cart");
-                } catch (Exception e) {
-                    return false;
-                }
+        fluentWait.until((ExpectedCondition<Boolean>) driver -> {
+            try {
+                return titleElement.isDisplayed() &&
+                        titleElement.getText().equals("My Cart");
+            } catch (Exception e) {
+                return false;
             }
         });
 
-        String titleCard = titleElement.getText();
-        assertEquals("My Cart", titleCard, "Title should 'My Cart'");
-        log().info("Screen Title: {}", titleCard);
+        assertThat(titleElement).hasTextEqualTo("My Cart", "Title should 'My Cart'");
     }
 
     public void checkProductName() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        String titleText = productNameElement.getText();
-        assertEquals(productsScreen.getProductText(), titleText, "Text should match productText");
-        log().info("Product name: {}", titleText);
+        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text should match productText");
     }
 
     public void verifyProductQuantity() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productQuantityElement));
-        String valueText = productQuantityElement.getText();
-        assertEquals("1", valueText, "Expected value '1', but found: " + valueText);
-        log().info("Product Quantity: {}", valueText);
+        assertThat(productQuantityElement).hasValue("1", "Expected value '1', but found: " + productQuantityElement.getText());
     }
 
     public void tapButtonProceedToCheckout() {

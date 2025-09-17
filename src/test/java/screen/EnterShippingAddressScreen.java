@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class EnterShippingAddressScreen extends TestBase {
 
@@ -42,9 +42,7 @@ public class EnterShippingAddressScreen extends TestBase {
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
-        String shippingText = titleElement.getText();
-        assertEquals("Enter a shipping address", shippingText, "Text should be 'Enter a shipping address'");
-        log().info("Screen Title: {}", shippingText);
+        assertThat(titleElement).hasTextEqualTo("Enter a shipping address", "Text should be 'Enter a shipping address'");
     }
 
     public void fillName() {

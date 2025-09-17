@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 
 public class ProductsScreen extends TestBase {
@@ -29,9 +29,7 @@ public class ProductsScreen extends TestBase {
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
-        String screenTitle = titleElement.getText();
-        assertEquals("Products", screenTitle, "Title should 'Products'");
-        log().info("Screen Title: {}", screenTitle);
+        assertThat(titleElement).hasTextEqualTo("Products", "Title should 'Products'");
     }
 
     public void getFirstProductName() {

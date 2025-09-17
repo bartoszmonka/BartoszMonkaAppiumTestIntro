@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class EnterPaymentMethodScreen extends TestBase {
 
@@ -36,9 +36,7 @@ public class EnterPaymentMethodScreen extends TestBase {
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
-        String paymentText = titleElement.getText();
-        assertEquals("Enter a payment method", paymentText, "Text should be 'Enter a payment method'");
-        log().info("Screen Title: {}", paymentText);
+        assertThat(titleElement).hasTextEqualTo("Enter a payment method", "Text should be 'Enter a payment method'");
     }
 
     public void fillName() {

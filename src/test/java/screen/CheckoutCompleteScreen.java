@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static generic.assertions.AssertWebElement.assertThat;
 
 public class CheckoutCompleteScreen extends TestBase {
 
@@ -24,9 +24,7 @@ public class CheckoutCompleteScreen extends TestBase {
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
-        String completeText = titleElement.getText();
-        assertEquals("Checkout Complete", completeText, "Text should be 'Checkout Complete'");
-        log().info("Screen Title: {}", completeText);
+        assertThat(titleElement).hasTextEqualTo("Checkout Complete", "Text should be 'Checkout Complete'");
     }
 
     public void tapContinueShoppingButton() {
