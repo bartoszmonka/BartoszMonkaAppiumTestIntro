@@ -1,6 +1,5 @@
 package screen;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,11 +26,9 @@ public class LoginScreen extends TestBase {
     }
 
     public void authenticateUserWhenRequired() {
-        List<WebElement> elements = driver.findElements(AppiumBy.id("com.saucelabs.mydemoapp.android:id/loginTV"));
-
-        if (!elements.isEmpty()) {
-            WebElement el187 = elements.get(0);
-            String loginText = el187.getText();
+        if (!loginElements.isEmpty()) {
+            WebElement login = loginElements.getFirst();
+            String loginText = login.getText();
 
             if (loginText.equals("Login")) {
                 log().info("Login screen appeared - performing login");

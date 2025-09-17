@@ -10,7 +10,6 @@ import tests.TestBase;
 import static generic.assertions.AssertWebElement.assertThat;
 
 public class ReviewYourOrderScreen extends TestBase {
-
     private final ProductsScreen productsScreen;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
@@ -35,7 +34,7 @@ public class ReviewYourOrderScreen extends TestBase {
 
     public void verifyProductName() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text in el26 should match productText");
+        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text should match productText");
     }
 
     public void tapPlaceOrderButton() {

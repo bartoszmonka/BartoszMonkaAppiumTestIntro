@@ -1,6 +1,7 @@
 package screen;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +11,8 @@ import tests.TestBase;
 import static generic.assertions.AssertWebElement.assertThat;
 
 public class EnterShippingAddressScreen extends TestBase {
+
+    private static final Dotenv dotenv = Dotenv.configure().filename(".env.test").load();
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
     private WebElement titleElement;
@@ -47,38 +50,38 @@ public class EnterShippingAddressScreen extends TestBase {
 
     public void fillName() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(fullNameField));
-        fullNameField.sendKeys("TestName TestSurname");
-        log().info("Filled in name: TestName TestSurname");
+        fullNameField.sendKeys(dotenv.get("SHIPPING_FULL_NAME"));
+        log().info("Filled in name: {}", dotenv.get("SHIPPING_FULL_NAME"));
     }
 
     public void fillAddress() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(addressField));
-        addressField.sendKeys("Test 123");
-        log().info("Filled in address 1: Test 123");
+        addressField.sendKeys(dotenv.get("SHIPPING_ADDRESS"));
+        log().info("Filled in address 1: {}", dotenv.get("SHIPPING_ADDRESS"));
     }
 
     public void fillCity() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(cityField));
-        cityField.sendKeys("TestCity");
-        log().info("Filled in city: TestCity");
+        cityField.sendKeys(dotenv.get("SHIPPING_CITY"));
+        log().info("Filled in city: {}", dotenv.get("SHIPPING_CITY"));
     }
 
     public void fillState() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(stateField));
-        stateField.sendKeys("TestState");
-        log().info("Filled in state: TestState");
+        stateField.sendKeys(dotenv.get("SHIPPING_STATE"));
+        log().info("Filled in state: {}", dotenv.get("SHIPPING_STATE"));
     }
 
     public void fillZipCode() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(zipCodeField));
-        zipCodeField.sendKeys("342123");
-        log().info("Filled in zip code: 342123");
+        zipCodeField.sendKeys(dotenv.get("SHIPPING_ZIP_CODE"));
+        log().info("Filled in zip code: {}", dotenv.get("SHIPPING_ZIP_CODE"));
     }
 
     public void fillCountry() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(countryField));
-        countryField.sendKeys("Poland");
-        log().info("Filled in country: Poland");
+        countryField.sendKeys(dotenv.get("SHIPPING_COUNTRY"));
+        log().info("Filled in country: {}", dotenv.get("SHIPPING_COUNTRY"));
     }
 
     public void fillShippingAddress() {
