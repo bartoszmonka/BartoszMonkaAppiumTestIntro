@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.TestBase;
 
-public class HeaderVidget extends TestBase {
+public class HeaderWidget extends TestBase {
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/cartIV")
     private WebElement cartButton;
@@ -18,7 +18,7 @@ public class HeaderVidget extends TestBase {
     @FindBy(xpath = "//*[@text='Catalog']")
     private WebElement catalogElement;
 
-    public HeaderVidget(AndroidDriver driver) {
+    public HeaderWidget(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

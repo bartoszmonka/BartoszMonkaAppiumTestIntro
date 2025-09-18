@@ -35,8 +35,8 @@ public class CompleteOrderProcessTests extends TestBase {
 
     @Step("2. Open the shopping cart and continue. Fill in all required information fields.")
     public void proceedToCheckoutAndFillShippingInfo() {
-        HeaderVidget headerVidget = new HeaderVidget(driver);
-        headerVidget.tapOnCart();
+        HeaderWidget headerWidget = new HeaderWidget(driver);
+        headerWidget.tapOnCart();
 
         MyCartScreen myCartScreen = new MyCartScreen(driver, productsScreen);
         myCartScreen.checkScreenTitle();
