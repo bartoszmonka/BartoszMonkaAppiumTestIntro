@@ -1,13 +1,10 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
-public class HeaderWidget extends TestBase {
+public class HeaderVidget extends BaseScreen {
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/cartIV")
     private WebElement cartButton;
@@ -18,10 +15,6 @@ public class HeaderWidget extends TestBase {
     @FindBy(xpath = "//*[@text='Catalog']")
     private WebElement catalogElement;
 
-    public HeaderWidget(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public void tapOnCart() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(cartButton));

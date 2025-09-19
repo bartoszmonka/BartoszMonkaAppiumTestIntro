@@ -1,16 +1,13 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
 import static generic.assertions.AssertWebElement.assertThat;
 
 
-public class ProductsScreen extends TestBase {
+public class ProductsScreen extends BaseScreen {
     String productText;
 
     @FindBy(xpath = "//*[@content-desc='title']")
@@ -22,10 +19,6 @@ public class ProductsScreen extends TestBase {
     @FindBy(xpath = "//*[@resource-id='com.saucelabs.mydemoapp.android:id/productIV'][1]")
     private WebElement firstProductImageElement;
 
-    public ProductsScreen(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));

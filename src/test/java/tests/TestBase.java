@@ -1,5 +1,6 @@
 package tests;
 
+import driver.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.apache.logging.log4j.LogManager;
@@ -40,6 +41,7 @@ public class TestBase {
         try {
             URL url = URI.create("http://127.0.0.1:4723").toURL();
             driver = new AndroidDriver(url, options);
+            DriverManager.setAndroidDriver(driver);
             log().info("AndroidDriver has been initialization");
         } catch (Exception e) {
             log().error("error during AndroidDriver initialization: {}", e.getMessage(), e);
@@ -50,8 +52,6 @@ public class TestBase {
 
     @AfterEach
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        DriverManager.disposeDriver();
     }
 }

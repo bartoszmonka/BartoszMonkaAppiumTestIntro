@@ -1,15 +1,12 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
 import java.util.List;
 
-public class LoginScreen extends TestBase {
+public class LoginScreen extends BaseScreen {
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/loginTV")
     private List<WebElement> loginElements;
@@ -20,10 +17,6 @@ public class LoginScreen extends TestBase {
     @FindBy(xpath = "//*[@content-desc='Tap to login with given credentials']")
     private WebElement loginButton;
 
-    public LoginScreen(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public void authenticateUserWhenRequired() {
         if (!loginElements.isEmpty()) {

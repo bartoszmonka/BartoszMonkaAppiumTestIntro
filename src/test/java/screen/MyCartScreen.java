@@ -1,22 +1,21 @@
 package screen;
 
+import driver.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import tests.TestBase;
 
 import java.time.Duration;
 
 import static generic.assertions.AssertWebElement.assertThat;
 
-public class MyCartScreen extends TestBase {
-    private final ProductsScreen productsScreen;
+public class MyCartScreen extends BaseScreen {
+    private ProductsScreen productsScreen;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/productTV")
     private WebElement titleElement;
@@ -30,14 +29,12 @@ public class MyCartScreen extends TestBase {
     @FindBy(xpath = "//*[@content-desc='Confirms products for checkout']")
     private WebElement proceedToCheckoutButton;
 
-    public MyCartScreen(AndroidDriver driver, ProductsScreen productsScreen) {
-        this.driver = driver;
+    public void setProductsScreen(ProductsScreen productsScreen) {
         this.productsScreen = productsScreen;
-        PageFactory.initElements(driver, this);
     }
 
     public void checkScreenTitle() {
-        FluentWait<AndroidDriver> fluentWait = new FluentWait<>(driver)
+        FluentWait<AndroidDriver> fluentWait = new FluentWait<>(DriverManager.getAndroidDriver())
                 .withTimeout(Duration.ofSeconds(15))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class)

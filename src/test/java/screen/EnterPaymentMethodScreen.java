@@ -1,16 +1,13 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
 import static generic.assertions.AssertWebElement.assertThat;
 
-public class EnterPaymentMethodScreen extends TestBase {
+public class EnterPaymentMethodScreen extends BaseScreen {
 
     private static final Dotenv dotenv = Dotenv.configure().filename(".env.test").load();
 
@@ -32,10 +29,6 @@ public class EnterPaymentMethodScreen extends TestBase {
     @FindBy(xpath = "//*[@content-desc='Saves payment info and launches screen to review checkout data']")
     private WebElement reviewOrderButton;
 
-    public EnterPaymentMethodScreen(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));

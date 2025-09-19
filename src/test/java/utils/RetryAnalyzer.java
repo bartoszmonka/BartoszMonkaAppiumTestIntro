@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.InvocationInterceptor;
 import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
-import screen.HeaderWidget;
+import screen.HeaderVidget;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -42,8 +42,8 @@ public class RetryAnalyzer implements InvocationInterceptor {
                 if (attempt > 1 && testInstance != null) {
                     AndroidDriver driver = getDriverFromTestInstance(testInstance);
                     if (driver != null) {
-                        HeaderWidget headerWidget = new HeaderWidget(driver);
-                        headerWidget.resetNavigationToCatalog();
+                        HeaderVidget headerVidget = new HeaderVidget();
+                        headerVidget.resetNavigationToCatalog();
                     }
                 }
 

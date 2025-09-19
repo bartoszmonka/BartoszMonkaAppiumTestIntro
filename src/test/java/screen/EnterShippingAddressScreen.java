@@ -1,16 +1,13 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
 import static generic.assertions.AssertWebElement.assertThat;
 
-public class EnterShippingAddressScreen extends TestBase {
+public class EnterShippingAddressScreen extends BaseScreen {
 
     private static final Dotenv dotenv = Dotenv.configure().filename(".env.test").load();
 
@@ -38,10 +35,6 @@ public class EnterShippingAddressScreen extends TestBase {
     @FindBy(xpath = "//*[@content-desc='Saves user info for checkout']")
     private WebElement toPaymentButton;
 
-    public EnterShippingAddressScreen(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));

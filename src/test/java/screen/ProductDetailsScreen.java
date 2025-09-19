@@ -1,16 +1,13 @@
 package screen;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import tests.TestBase;
 
 import static generic.assertions.AssertWebElement.assertThat;
 
-public class ProductDetailsScreen extends TestBase {
-    private final ProductsScreen productsScreen;
+public class ProductDetailsScreen extends BaseScreen {
+    private ProductsScreen productsScreen;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/productTV")
     private WebElement productNameHeader;
@@ -18,10 +15,8 @@ public class ProductDetailsScreen extends TestBase {
     @FindBy(xpath = "//*[@content-desc='Tap to add product to cart']")
     private WebElement addToCartButton;
 
-    public ProductDetailsScreen(AndroidDriver driver, ProductsScreen productsScreen) {
-        this.driver = driver;
+    public void setProductsScreen(ProductsScreen productsScreen) {
         this.productsScreen = productsScreen;
-        PageFactory.initElements(driver, this);
     }
 
     public void checkProductNameInHeader() {

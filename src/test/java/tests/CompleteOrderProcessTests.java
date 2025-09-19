@@ -15,7 +15,7 @@ public class CompleteOrderProcessTests extends TestBase {
     @Test
     @Description("End-to-end test validating complete e-commerce checkout process from product selection to order completion")
     public void verifyCompleteCheckoutProcess() {
-        productsScreen = new ProductsScreen(driver);
+        productsScreen = new ProductsScreen();
         addProductToCart();
         proceedToCheckoutAndFillShippingInfo();
         fillPaymentInfoAndProceedToReview();
@@ -28,26 +28,28 @@ public class CompleteOrderProcessTests extends TestBase {
         productsScreen.checkScreenTitle();
         productsScreen.tapOnProduct();
 
-        ProductDetailsScreen productDetailsScreen = new ProductDetailsScreen(driver, productsScreen);
+        ProductDetailsScreen productDetailsScreen = new ProductDetailsScreen();
+        productDetailsScreen.setProductsScreen(productsScreen);
         productDetailsScreen.checkProductNameInHeader();
         productDetailsScreen.tapButtonAddToCart();
     }
 
     @Step("2. Open the shopping cart and continue. Fill in all required information fields.")
     public void proceedToCheckoutAndFillShippingInfo() {
-        HeaderWidget headerWidget = new HeaderWidget(driver);
-        headerWidget.tapOnCart();
+        HeaderVidget headerVidget = new HeaderVidget();
+        headerVidget.tapOnCart();
 
-        MyCartScreen myCartScreen = new MyCartScreen(driver, productsScreen);
+        MyCartScreen myCartScreen = new MyCartScreen();
+        myCartScreen.setProductsScreen(productsScreen);
         myCartScreen.checkScreenTitle();
         myCartScreen.checkProductName();
         myCartScreen.verifyProductQuantity();
         myCartScreen.tapButtonProceedToCheckout();
 
-        LoginScreen loginScreen = new LoginScreen(driver);
+        LoginScreen loginScreen = new LoginScreen();
         loginScreen.authenticateUserWhenRequired();
 
-        EnterShippingAddressScreen enterShippingAddressScreen = new EnterShippingAddressScreen(driver);
+        EnterShippingAddressScreen enterShippingAddressScreen = new EnterShippingAddressScreen();
         enterShippingAddressScreen.checkScreenTitle();
         enterShippingAddressScreen.fillShippingAddress();
         enterShippingAddressScreen.tapToPaymentButton();
@@ -55,7 +57,7 @@ public class CompleteOrderProcessTests extends TestBase {
 
     @Step("3. Navigate to the payment screen. Enter payment information and proceed to order overview.")
     public void fillPaymentInfoAndProceedToReview() {
-        EnterPaymentMethodScreen enterPaymentMethodScreen = new EnterPaymentMethodScreen(driver);
+        EnterPaymentMethodScreen enterPaymentMethodScreen = new EnterPaymentMethodScreen();
         enterPaymentMethodScreen.checkScreenTitle();
         enterPaymentMethodScreen.fillPaymentMethod();
         enterPaymentMethodScreen.tapReviewOrderButton();
@@ -63,7 +65,8 @@ public class CompleteOrderProcessTests extends TestBase {
 
     @Step("4. Ensure the Checkout screen displays the correct order details.")
     public void verifyOrderDetailsAndPlaceOrder() {
-        ReviewYourOrderScreen reviewYourOrderScreen = new ReviewYourOrderScreen(driver, productsScreen);
+        ReviewYourOrderScreen reviewYourOrderScreen = new ReviewYourOrderScreen();
+        reviewYourOrderScreen.setProductsScreen(productsScreen);
         reviewYourOrderScreen.checkScreenTitle();
         reviewYourOrderScreen.verifyProductName();
         reviewYourOrderScreen.tapPlaceOrderButton();
@@ -71,7 +74,7 @@ public class CompleteOrderProcessTests extends TestBase {
 
     @Step("5. Place the Order and complete the purchase process.")
     public void completeOrderAndReturnToProducts() {
-        CheckoutCompleteScreen checkoutCompleteScreen = new CheckoutCompleteScreen(driver);
+        CheckoutCompleteScreen checkoutCompleteScreen = new CheckoutCompleteScreen();
         checkoutCompleteScreen.checkScreenTitle();
         checkoutCompleteScreen.tapContinueShoppingButton();
         productsScreen.checkScreenTitle();
