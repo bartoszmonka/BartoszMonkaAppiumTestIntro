@@ -15,7 +15,6 @@ import java.time.Duration;
 import static generic.assertions.AssertWebElement.assertThat;
 
 public class MyCartScreen extends BaseScreen {
-    private ProductsScreen productsScreen;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/productTV")
     private WebElement titleElement;
@@ -28,10 +27,6 @@ public class MyCartScreen extends BaseScreen {
 
     @FindBy(xpath = "//*[@content-desc='Confirms products for checkout']")
     private WebElement proceedToCheckoutButton;
-
-    public void setProductsScreen(ProductsScreen productsScreen) {
-        this.productsScreen = productsScreen;
-    }
 
     public void checkScreenTitle() {
         FluentWait<AndroidDriver> fluentWait = new FluentWait<>(DriverManager.getAndroidDriver())
@@ -51,9 +46,9 @@ public class MyCartScreen extends BaseScreen {
         assertThat(titleElement).hasTextEqualTo("My Cart", "Title should 'My Cart'");
     }
 
-    public void checkProductName() {
+    public void checkProductName(String expectedProductName) {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text should match productText");
+        assertThat(productNameElement).hasTextMatching(expectedProductName, "Text should match productText");
     }
 
     public void verifyProductQuantity() {

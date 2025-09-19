@@ -8,6 +8,7 @@ import utils.RetryAnalyzer;
 
 public class CompleteOrderProcessTests extends TestBase {
     ProductsScreen productsScreen;
+    String selectedProductName;
 
     @TmsLink("TC ID-1")
     @Severity(SeverityLevel.BLOCKER)
@@ -27,10 +28,10 @@ public class CompleteOrderProcessTests extends TestBase {
     public void addProductToCart() {
         productsScreen.checkScreenTitle();
         productsScreen.tapOnProduct();
+        selectedProductName = productsScreen.getProductText();
 
         ProductDetailsScreen productDetailsScreen = new ProductDetailsScreen();
-        productDetailsScreen.setProductsScreen(productsScreen);
-        productDetailsScreen.checkProductNameInHeader();
+        productDetailsScreen.checkProductNameInHeader(selectedProductName);
         productDetailsScreen.tapButtonAddToCart();
     }
 
@@ -40,9 +41,8 @@ public class CompleteOrderProcessTests extends TestBase {
         headerVidget.tapOnCart();
 
         MyCartScreen myCartScreen = new MyCartScreen();
-        myCartScreen.setProductsScreen(productsScreen);
         myCartScreen.checkScreenTitle();
-        myCartScreen.checkProductName();
+        myCartScreen.checkProductName(selectedProductName);
         myCartScreen.verifyProductQuantity();
         myCartScreen.tapButtonProceedToCheckout();
 
@@ -66,9 +66,8 @@ public class CompleteOrderProcessTests extends TestBase {
     @Step("4. Ensure the Checkout screen displays the correct order details.")
     public void verifyOrderDetailsAndPlaceOrder() {
         ReviewYourOrderScreen reviewYourOrderScreen = new ReviewYourOrderScreen();
-        reviewYourOrderScreen.setProductsScreen(productsScreen);
         reviewYourOrderScreen.checkScreenTitle();
-        reviewYourOrderScreen.verifyProductName();
+        reviewYourOrderScreen.verifyProductName(selectedProductName);
         reviewYourOrderScreen.tapPlaceOrderButton();
     }
 

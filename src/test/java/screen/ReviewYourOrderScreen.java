@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static generic.assertions.AssertWebElement.assertThat;
 
 public class ReviewYourOrderScreen extends BaseScreen {
-    private ProductsScreen productsScreen;
 
     @FindBy(id = "com.saucelabs.mydemoapp.android:id/enterShippingAddressTV")
     private WebElement titleElement;
@@ -18,18 +17,14 @@ public class ReviewYourOrderScreen extends BaseScreen {
     @FindBy(xpath = "//*[@content-desc='Completes the process of checkout']")
     private WebElement placeOrderButton;
 
-    public void setProductsScreen(ProductsScreen productsScreen) {
-        this.productsScreen = productsScreen;
-    }
-
     public void checkScreenTitle() {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(titleElement));
         assertThat(titleElement).hasTextEqualTo("Review your order", "Text should be 'Review your order'");
     }
 
-    public void verifyProductName() {
+    public void verifyProductName(String expectedProductName) {
         getWebDriverWait().until(ExpectedConditions.visibilityOf(productNameElement));
-        assertThat(productNameElement).hasTextMatching(productsScreen.getProductText(), "Text should match productText");
+        assertThat(productNameElement).hasTextMatching(expectedProductName, "Text should match productText");
     }
 
     public void tapPlaceOrderButton() {
